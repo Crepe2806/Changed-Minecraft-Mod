@@ -1,5 +1,6 @@
 package net.ltxprogrammer.changed.init;
 
+import net.ltxprogrammer.changed.Changed;
 import net.ltxprogrammer.changed.client.renderer.*;
 import net.ltxprogrammer.changed.client.renderer.particle.GasParticleRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -12,15 +13,21 @@ import net.minecraftforge.fml.common.Mod;
 public class ChangedEntityRenderers {
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        final boolean useNewModels = Changed.config.client.useNewModels.get();
+
         event.registerEntityRenderer(ChangedEntities.BEHEMOTH_HEAD.get(), BehemothHeadRenderer::new);
         event.registerEntityRenderer(ChangedEntities.BEHEMOTH_HAND_LEFT.get(), BehemothHandLeftRenderer::new);
         event.registerEntityRenderer(ChangedEntities.BEHEMOTH_HAND_RIGHT.get(), BehemothHandRightRenderer::new);
 
         event.registerEntityRenderer(ChangedEntities.AEROSOL_LATEX_WOLF.get(), AerosolLatexWolfRenderer::new);
-        event.registerEntityRenderer(ChangedEntities.DARK_LATEX_DRAGON.get(), DarkLatexDragonRenderer::new);
-        event.registerEntityRenderer(ChangedEntities.DARK_LATEX_WOLF_FEMALE.get(), DarkLatexWolfFemaleRenderer::new);
-        event.registerEntityRenderer(ChangedEntities.DARK_LATEX_WOLF_MALE.get(), DarkLatexWolfMaleRenderer::new);
-        event.registerEntityRenderer(ChangedEntities.DARK_LATEX_YUFENG.get(), DarkLatexYufengRenderer::new);
+        event.registerEntityRenderer(ChangedEntities.DARK_LATEX_DRAGON.get(),
+                useNewModels ? DarkLatexDragonRenderer.Remodel::new :  DarkLatexDragonRenderer::new);
+        event.registerEntityRenderer(ChangedEntities.DARK_LATEX_WOLF_FEMALE.get(),
+                useNewModels ? DarkLatexWolfFemaleRenderer.Remodel::new : DarkLatexWolfFemaleRenderer::new);
+        event.registerEntityRenderer(ChangedEntities.DARK_LATEX_WOLF_MALE.get(),
+                useNewModels ? DarkLatexWolfMaleRenderer.Remodel::new : DarkLatexWolfMaleRenderer::new);
+        event.registerEntityRenderer(ChangedEntities.DARK_LATEX_YUFENG.get(),
+                useNewModels ? DarkLatexYufengRenderer.Remodel::new : DarkLatexYufengRenderer::new);
         event.registerEntityRenderer(ChangedEntities.HEADLESS_KNIGHT.get(), HeadlessKnightRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_ALIEN.get(), LatexAlienRenderer::new);
         //event.registerEntityRenderer(ChangedEntities.LATEX_BEE.get(), LatexBeeRenderer::new); // TODO: Uncomment when appropriate
@@ -49,15 +56,18 @@ public class ChangedEntityRenderers {
         event.registerEntityRenderer(ChangedEntities.LATEX_RACCOON.get(), LatexRaccoonRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_RED_DRAGON.get(), LatexRedDragonRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_RED_PANDA.get(), LatexRedPandaRenderer::new);
-        event.registerEntityRenderer(ChangedEntities.LATEX_SHARK.get(), LatexSharkRenderer::new);
+        event.registerEntityRenderer(ChangedEntities.LATEX_SHARK.get(),
+                useNewModels ? LatexSharkRenderer.Remodel::new : LatexSharkRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_SHARK_FEMALE.get(), LatexSharkFemaleRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_SHARK_MALE.get(), LatexSharkMaleRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_SILVER_FOX.get(), LatexSilverFoxRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_SIREN.get(), LatexSirenRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_SNAKE.get(), LatexSnakeRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_SNIPER_DOG.get(), LatexSniperDogRenderer::new);
-        event.registerEntityRenderer(ChangedEntities.LATEX_SNOW_LEOPARD_FEMALE.get(), LatexSnowLeopardFemaleRenderer::new);
-        event.registerEntityRenderer(ChangedEntities.LATEX_SNOW_LEOPARD_MALE.get(), LatexSnowLeopardMaleRenderer::new);
+        event.registerEntityRenderer(ChangedEntities.LATEX_SNOW_LEOPARD_FEMALE.get(),
+                useNewModels ? LatexSnowLeopardFemaleRenderer.Remodel::new : LatexSnowLeopardFemaleRenderer::new);
+        event.registerEntityRenderer(ChangedEntities.LATEX_SNOW_LEOPARD_MALE.get(),
+                useNewModels ? LatexSnowLeopardMaleRenderer.Remodel::new : LatexSnowLeopardMaleRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_SQUID_DOG_FEMALE.get(), LatexSquidDogFemaleRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_SQUID_DOG_MALE.get(), LatexSquidDogMaleRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LATEX_SQUIRREL.get(), LatexSquirrelRenderer::new);
@@ -71,8 +81,10 @@ public class ChangedEntityRenderers {
         event.registerEntityRenderer(ChangedEntities.LIGHT_LATEX_CENTAUR.get(), LightLatexCentaurRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LIGHT_LATEX_KNIGHT.get(), LightLatexKnightRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LIGHT_LATEX_KNIGHT_FUSION.get(), LightLatexKnightFusionRenderer::new);
-        event.registerEntityRenderer(ChangedEntities.LIGHT_LATEX_WOLF_FEMALE.get(), LightLatexWolfFemaleRenderer::new);
-        event.registerEntityRenderer(ChangedEntities.LIGHT_LATEX_WOLF_MALE.get(), LightLatexWolfMaleRenderer::new);
+        event.registerEntityRenderer(ChangedEntities.LIGHT_LATEX_WOLF_FEMALE.get(),
+                useNewModels ? LightLatexWolfFemaleRenderer.Remodel::new : LightLatexWolfFemaleRenderer::new);
+        event.registerEntityRenderer(ChangedEntities.LIGHT_LATEX_WOLF_MALE.get(),
+                useNewModels ? LightLatexWolfMaleRenderer.Remodel::new : LightLatexWolfMaleRenderer::new);
         event.registerEntityRenderer(ChangedEntities.LIGHT_LATEX_WOLF_ORGANIC.get(), LightLatexWolfOrganicRenderer::new);
         event.registerEntityRenderer(ChangedEntities.MILK_PUDDING.get(), MilkPuddingRenderer::new);
         event.registerEntityRenderer(ChangedEntities.SHARK.get(), SharkRenderer::new);
